@@ -122,7 +122,7 @@
           getPercent() {
             return Math.round(
               (this.todoitems.filter((todo) => todo.done == true).length /
-                this.todoitems.length) *
+                (this.todoitems.length || 1)) *
                 100
             );
           },
