@@ -10,6 +10,7 @@
     v-bind:filtertext="filtertext"
     v-on:changedone="changedone"
     v-on:removetask="removetask"
+    v-on:changetexttask="changetexttask"
   ></TodoList>
 </template>
 
@@ -71,8 +72,23 @@ export default {
     removetask(id) {
       this.todoItems = this.todoItems.filter((t) => t.id !== id);
     },
+    changetexttask(id, text) {
+      for (let i = 0; i < this.todoItems.length; i++) {
+        if (this.todoItems[i].id == id) {
+          this.todoItems[i].text = text;
+          console.log(this.todoItems[i]);
+          break;
+        }
+      }
+    },
   },
 };
 </script>
 
-<style></style>
+<style>
+#app {
+  max-width: 800px;
+  margin: auto;
+  padding: 5px;
+}
+</style>

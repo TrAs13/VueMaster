@@ -7,6 +7,7 @@
       v-bind:todo="todoItem"
       v-on:changedone="changedone"
       v-on:removetask="removetask"
+      v-on:changetexttask="changetexttask"
     ></TodoItem>
   </ol>
 </template>
@@ -30,6 +31,9 @@ export default {
     },
     changedone(id) {
       this.$emit("changedone", id);
+    },
+    changetexttask(id, text) {
+      this.$emit("changetexttask", id, text);
     },
   },
   computed: {
