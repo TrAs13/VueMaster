@@ -5,16 +5,22 @@
       v-bind:todo="todo"
       v-on:changedone="changedone"
     ></TodoCheckBtn>
+    <TodoRemoveBtn
+      v-bind:todo="todo"
+      v-on:removetask="removetask"
+    ></TodoRemoveBtn>
   </li>
 </template>
 
 <script>
 import TodoCheckBtn from "./TodoCheckBtn.vue";
+import TodoRemoveBtn from "./TodoRemoveBtn.vue";
 
 export default {
   name: "TodoItem",
   components: {
     TodoCheckBtn,
+    TodoRemoveBtn,
   },
   props: {
     todo: {
@@ -23,7 +29,6 @@ export default {
   },
   methods: {
     removetask(id) {
-      console.log("2");
       this.$emit("removetask", id);
     },
     changedone(id) {

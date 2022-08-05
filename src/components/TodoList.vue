@@ -6,6 +6,7 @@
       :key="todoItem.id"
       v-bind:todo="todoItem"
       v-on:changedone="changedone"
+      v-on:removetask="removetask"
     ></TodoItem>
   </ol>
 </template>
@@ -24,6 +25,9 @@ export default {
     todoitems: Array,
   },
   methods: {
+    removetask(id) {
+      this.$emit("removetask", id);
+    },
     changedone(id) {
       this.$emit("changedone", id);
     },
