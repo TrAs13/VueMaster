@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="todo-info">
     <div class="badge bg-primary">Completed task {{ getCompleted }}</div>
     <div class="badge bg-primary">All tasks {{ getAllTask }}</div>
     <div class="badge bg-primary">Percent complete task {{ getPercent }}%</div>
@@ -36,4 +36,10 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+.todo-info {
+  display: flex;
+  gap: 10px;
+  margin: auto;
+}
+</style>

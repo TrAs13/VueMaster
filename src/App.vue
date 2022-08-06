@@ -34,34 +34,47 @@ export default {
   data() {
     return {
       msg: "Hello from Vue App",
-      todoItems: [
-        // { id: 1, text: "task 1", done: false },
-        // { id: 2, text: "task 2", done: false },
-        // { id: 3, text: "task 3", done: true },
-        // { id: 4, text: "task 4", done: false },
-        // { id: 5, text: "task 5", done: false },
-      ],
       filter: "all",
       filtertext: "",
+      todoItems: [],
     };
   },
-
+  async mounted() {
+    await this.updateTodoItems();
+  },
   methods: {
-    changedone(id) {
-      for (let i = 0; i < this.todoItems.length; i++) {
-        if (this.todoItems[i].id == id) {
-          this.todoItems[i].done = !this.todoItems[i].done;
-          break;
+    async updateTodoItems() {
+      let keys = await Object.keys(localStorage);
+      if (keys) {
+        let todos = [];
+        for (let key of keys) {
+          todos.push(JSON.parse(localStorage.getItem(key)));
         }
+        this.todoItems = todos;
       }
+    },
+    changedone(id) {
+      localStorage.setItem(
+        id,
+        JSON.stringify({
+          id: id,
+          text: this.todoItems[id].text,
+          done: !this.todoItems[id].done,
+        })
+      );
+      this.updateTodoItems();
     },
     addnewtask(text) {
       let newId;
-      if (this.todoItems.length == 0) newId = 1;
+      if (this.todoItems.length == 0) newId = 0;
       else
         newId =
           Math.max(...Object.values(this.todoItems).map((elem) => elem.id)) + 1;
-      this.todoItems.push({ id: newId, text: text, done: false });
+      localStorage.setItem(
+        newId,
+        JSON.stringify({ id: newId, text: text, done: false })
+      );
+      this.updateTodoItems();
     },
     changefilter(filter) {
       this.filter = filter;
@@ -70,16 +83,15 @@ export default {
       this.filtertext = text;
     },
     removetask(id) {
-      this.todoItems = this.todoItems.filter((t) => t.id !== id);
+      localStorage.removeItem(id);
+      this.updateTodoItems();
     },
     changetexttask(id, text) {
-      for (let i = 0; i < this.todoItems.length; i++) {
-        if (this.todoItems[i].id == id) {
-          this.todoItems[i].text = text;
-          console.log(this.todoItems[i]);
-          break;
-        }
-      }
+      localStorage.setItem(
+        id,
+        JSON.stringify({ id: id, text: text, done: this.todoItems[id].done })
+      );
+      this.updateTodoItems();
     },
   },
 };
@@ -90,5 +102,8 @@ export default {
   max-width: 800px;
   margin: auto;
   padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 </style>

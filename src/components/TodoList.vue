@@ -1,6 +1,7 @@
 <template>
   <h1 v-if="todoitems.length == 0">Please add new task!</h1>
-  <ol v-else class="list-group list-group-numbered">
+  <ol v-else class="list-group list-group-numbered todo-list">
+    <span>Click(tap) to text for editing</span>
     <TodoItem
       v-for="todoItem in filteredItems"
       :key="todoItem.id"
@@ -51,4 +52,9 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+span {
+  font-size: 12px;
+  opacity: 80%;
+}
+</style>
