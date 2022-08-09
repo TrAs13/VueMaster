@@ -1,5 +1,5 @@
 <template>
-  <h1>{{ msg }}</h1>
+  <h1 v-color="msgColor">{{ msg }}</h1>
   <TodoAddForm v-on:addnewtask="addnewtask"></TodoAddForm>
   <TodoSearch v-on:searchtask="searchtask"></TodoSearch>
   <TodoFilter v-on:changefilter="changefilter"></TodoFilter>
@@ -34,6 +34,7 @@ export default {
   data() {
     return {
       msg: "Hello from Vue App",
+      msgColor: "blue",
       filter: "all",
       filtertext: "",
       todoItems: [],

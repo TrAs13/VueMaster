@@ -1,4 +1,9 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from "vue";
+import App from "./App.vue";
+import colorDirective from "./directives/color";
 
-createApp(App).mount('#app')
+const app = createApp(App);
+
+app.directive("color", colorDirective);
+
+app.mount("#app");
