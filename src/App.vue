@@ -1,4 +1,5 @@
 <template>
+  <TodoRenderButton></TodoRenderButton>
   <h1 v-color="msgColor">{{ msg }}</h1>
   <h1 v-color="msgColor">{{ $filters.numberFormat(10000, "руб") }}</h1>
   <TodoAddForm v-on:addnewtask="addnewtask"></TodoAddForm>
@@ -21,6 +22,7 @@ import TodoFilter from "./components/TodoFilter.vue";
 import TodoInfo from "./components/TodoInfo.vue";
 import TodoAddForm from "./components/TodoAddForm.vue";
 import TodoSearch from "./components/TodoSearch.vue";
+import TodoRenderButton from "./components/TodoRenderButton.vue";
 
 export default {
   name: "App",
@@ -30,6 +32,7 @@ export default {
     TodoInfo,
     TodoAddForm,
     TodoSearch,
+    TodoRenderButton,
   },
 
   data() {
