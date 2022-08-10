@@ -1,5 +1,6 @@
 <template>
   <h1 v-color="msgColor">{{ msg }}</h1>
+  <h1 v-color="msgColor">{{ $filters.numberFormat(10000, "руб") }}</h1>
   <TodoAddForm v-on:addnewtask="addnewtask"></TodoAddForm>
   <TodoSearch v-on:searchtask="searchtask"></TodoSearch>
   <TodoFilter v-on:changefilter="changefilter"></TodoFilter>
