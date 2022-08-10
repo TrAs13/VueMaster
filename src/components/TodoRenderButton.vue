@@ -1,6 +1,7 @@
 <script>
 import { h } from "vue";
 export default {
+  name: "TodoRenderButton",
   data() {
     return {
       tag: "button",

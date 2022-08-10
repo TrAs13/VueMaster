@@ -10,5 +10,16 @@ app.config.globalProperties.$filters = {
     return ("" + value).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ") + currency;
   },
 };
+app.mixin({
+  created() {
+    console.log("component created: " + this.$options.name);
+  },
+  mounted() {
+    console.log("component mounted: " + this.$options.name);
+  },
+  updated() {
+    console.log("component updated: " + this.$options.name);
+  },
+});
 
 app.mount("#app");
