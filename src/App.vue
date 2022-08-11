@@ -22,7 +22,6 @@ import TodoFilter from "./components/TodoFilter.vue";
 import TodoInfo from "./components/TodoInfo.vue";
 import TodoAddForm from "./components/TodoAddForm.vue";
 import TodoSearch from "./components/TodoSearch.vue";
-import TodoRenderButton from "./components/TodoRenderButton.vue";
 
 export default {
   name: "App",
@@ -32,7 +31,6 @@ export default {
     TodoInfo,
     TodoAddForm,
     TodoSearch,
-    TodoRenderButton,
   },
 
   data() {
