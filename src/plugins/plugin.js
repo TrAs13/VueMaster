@@ -1,8 +1,11 @@
 import { h } from "vue";
 import colorDirective from "../directives/color";
+import blurDirective from "../directives/blur";
+
 export default {
   install: (app) => {
     app.directive("color", colorDirective);
+    app.directive("blur", blurDirective);
     app.config.globalProperties.$filters = {
       numberFormat(value, currency = "") {
         return (

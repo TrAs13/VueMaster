@@ -1,6 +1,7 @@
 <template>
   <div class="input-group mb-3">
     <input
+      v-blur
       type="text"
       class="form-control"
       placeholder="Add new task"
