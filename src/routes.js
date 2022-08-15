@@ -4,7 +4,6 @@ import AboutPage from "./pages/AboutComponent";
 import TaskListPage from "./pages/TaskListComponent";
 import TaskPage from "./pages/TaskComponent";
 import Error404Page from "./pages/Error404Component";
-
 const routes = [
   {
     path: "",
@@ -17,11 +16,17 @@ const routes = [
   {
     path: "/tasklist",
     component: TaskListPage,
+    beforeEnter(to, from, next) {
+      if (localStorage.getItem("auth") == "true") next();
+    },
   },
   {
     path: "/task/:id",
     component: TaskPage,
     props: true,
+    beforeEnter(to, from, next) {
+      if (localStorage.getItem("auth") == "true") next();
+    },
   },
   {
     path: "/error404",
