@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "./pages/HomeComponent";
 import AboutPage from "./pages/AboutComponent";
 import TaskListPage from "./pages/TaskListComponent";
+import TaskPage from "./pages/TaskComponent";
 import Error404Page from "./pages/Error404Component";
 
 const routes = [
@@ -16,6 +17,11 @@ const routes = [
   {
     path: "/tasklist",
     component: TaskListPage,
+  },
+  {
+    path: "/task/:id",
+    component: TaskPage,
+    props: true,
   },
   {
     path: "/error404",
