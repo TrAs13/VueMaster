@@ -1,16 +1,22 @@
 <template>
   <div class="task__item">
-    <h1>{{ item.title }}</h1>
-    <p>{{ $route.query.desc }}</p>
+    <div ref="title" contenteditable="true">{{ item.title }}</div>
+    <div ref="desc" contenteditable="true">{{ $route.query.desc }}</div>
     <p>Create date {{ item.created }}</p>
     <p>Update date {{ item.updated }}</p>
     <button
       type="button"
       class="btn"
       :class="[item.done ? 'btn-success' : 'btn-secondary']"
-      v-on:click="changedone"
+      v-on:click="changeDone"
     >
       {{ getBtnText }}
+    </button>
+    <button type="button" class="btn btn-danger" v-on:click="removeTask">
+      Remove
+    </button>
+    <button type="button" class="btn btn-primary" v-on:click="changeTask">
+      Change task
     </button>
   </div>
 </template>
@@ -51,6 +57,36 @@ export default {
     getBtnText() {
       if (this.item.done) return "completed";
       else return "in order";
+    },
+  },
+  methods: {
+    async removeTask() {
+      axios.delete(`http://localhost:3000/tasks/${this.id}`);
+      this.$router.push({ path: "/tasklist" });
+    },
+    async changeDone() {
+      try {
+        await axios.patch(`${`http://localhost:3000/tasks`}/${this.id}`, {
+          done: !this.item.done,
+          updated: new Date(),
+        });
+        this.item.done = !this.item.done;
+        this.item.updated = new Date();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async changeTask() {
+      try {
+        await axios.patch(`${`http://localhost:3000/tasks`}/${this.id}`, {
+          title: this.$refs.title.innerText,
+          desc: this.$refs.desc.innerText,
+        });
+        this.item.title = this.$refs.title.innerText;
+        this.item.desc = this.$refs.desc.innerText;
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
 };

@@ -4,6 +4,7 @@ import AboutPage from "./pages/AboutComponent";
 import TaskListPage from "./pages/TaskListComponent";
 import TaskPage from "./pages/TaskComponent";
 import Error404Page from "./pages/Error404Component";
+import axios from "axios";
 const routes = [
   {
     path: "",
@@ -16,8 +17,9 @@ const routes = [
   {
     path: "/tasklist",
     component: TaskListPage,
-    beforeEnter(to, from, next) {
-      if (localStorage.getItem("auth") == "true") next();
+    async beforeEnter(to, from, next) {
+      const res = await axios.get(`http://localhost:3000/auth`);
+      if (res.data.auth) next();
     },
   },
   {
@@ -25,8 +27,9 @@ const routes = [
     component: TaskPage,
     name: "taskId",
     props: true,
-    beforeEnter(to, from, next) {
-      if (localStorage.getItem("auth") == "true") next();
+    async beforeEnter(to, from, next) {
+      const res = await axios.get(`http://localhost:3000/auth`);
+      if (res.data.auth) next();
     },
   },
   {

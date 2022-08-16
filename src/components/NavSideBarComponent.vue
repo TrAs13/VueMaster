@@ -1,11 +1,6 @@
 <template>
   <ul class="nav flex-column task__sidebar">
-    <li
-      class="nav-item"
-      :class="[task.done ? 'bg-success' : 'bg-secondary']"
-      v-bind:key="task"
-      v-for="task in items"
-    >
+    <li class="nav-item" v-bind:key="task" v-for="task in items">
       <router-link
         class="nav-link"
         active-class="active"
@@ -45,8 +40,5 @@ export default {
   margin-right: 20px;
   border: 1px solid black;
   float: left;
-}
-.nav-link {
-  color: white;
 }
 </style>
