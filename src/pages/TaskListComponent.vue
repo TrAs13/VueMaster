@@ -2,7 +2,15 @@
   <h1>Hi from TaskList</h1>
   <ul class="list-group">
     <li class="list-group-item" v-bind:key="task" v-for="task in 5">
-      <router-link :to="'/task/' + task">Task {{ task }}</router-link>
+      <router-link
+        class="nav-link"
+        :to="{
+          name: 'taskId',
+          params: { id: task },
+          query: { desc: 'This description task ' + task },
+        }"
+        >Task {{ task }}
+      </router-link>
     </li>
   </ul>
 </template>

@@ -23,6 +23,7 @@ const routes = [
   {
     path: "/task/:id",
     component: TaskPage,
+    name: "taskId",
     props: true,
     beforeEnter(to, from, next) {
       if (localStorage.getItem("auth") == "true") next();
