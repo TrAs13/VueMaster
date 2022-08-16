@@ -1,28 +1,18 @@
 <template>
   <div class="task">
-    <ul class="nav flex-column task__sidebar">
-      <li class="nav-item" v-bind:key="task" v-for="task in 5">
-        <router-link
-          class="nav-link"
-          active-class="active"
-          :to="{
-            name: 'taskId',
-            params: { id: task },
-            query: { desc: 'This description task ' + task },
-          }"
-          >Task {{ task }}</router-link
-        >
-      </li>
-    </ul>
-    <h1>Task by id {{ id }}</h1>
-    <p>{{ $route.query.desc }}</p>
+    <button class="btn btn-primary" @click="goBack()">Go back</button>
+    <NavSideBarComponent></NavSideBarComponent>
+    <TaskDescComponent v-bind:id="id"></TaskDescComponent>
   </div>
-  <button class="btn btn-primary" @click="goBack()">Go back</button>
 </template>
 
 <script>
+import NavSideBarComponent from "../components/NavSideBarComponent.vue";
+import TaskDescComponent from "../components/TaskDescComponent.vue";
+
 export default {
   name: "TaskComponent",
+  components: { NavSideBarComponent, TaskDescComponent },
   props: ["id"],
   methods: {
     goBack() {
@@ -33,12 +23,9 @@ export default {
 </script>
 
 <style>
-.task {
+.task__item {
   display: flex;
-}
-
-.task__sidebar {
-  margin-right: 10px;
-  border: 1px solid black;
+  gap: 10px;
+  flex-direction: column;
 }
 </style>

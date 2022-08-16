@@ -1,6 +1,8 @@
 <template>
-  <NavBarComponent></NavBarComponent>
-  <router-view v-bind:auth="authenticated" v-on:login="login"></router-view>
+  <div class="app">
+    <NavBarComponent></NavBarComponent>
+    <router-view v-bind:auth="authenticated" v-on:login="login"></router-view>
+  </div>
 </template>
 
 <script>
@@ -25,4 +27,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.app {
+  max-width: 800px;
+  margin: auto;
+}
+</style>

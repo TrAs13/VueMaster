@@ -1,21 +1,21 @@
 <template>
-  <h1>Hi from TaskList</h1>
-  <ul class="list-group">
+  <ul class="nav flex-column task__sidebar">
     <li
-      class="list-group-item"
+      class="nav-item"
+      :class="[task.done ? 'bg-success' : 'bg-secondary']"
       v-bind:key="task"
       v-for="task in items"
-      :class="[task.done ? 'bg-success' : 'bg-secondary']"
     >
       <router-link
         class="nav-link"
+        active-class="active"
         :to="{
           name: 'taskId',
           params: { id: task.id },
           query: { desc: task.desc },
         }"
-        >{{ task.title }}
-      </router-link>
+        >{{ task.title }}</router-link
+      >
     </li>
   </ul>
 </template>
@@ -23,7 +23,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "TaskListComponent",
+  name: "NavSideBarComponent",
   data() {
     return {
       items: [],
@@ -33,7 +33,6 @@ export default {
     try {
       const res = await axios.get(`http://localhost:3000/tasks`);
       this.items = res.data;
-      console.log(this.items);
     } catch (error) {
       console.log(error);
     }
@@ -41,4 +40,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.task__sidebar {
+  margin-right: 20px;
+  border: 1px solid black;
+  float: left;
+}
+.nav-link {
+  color: white;
+}
+</style>
