@@ -18,6 +18,6 @@
     }
   ],
   "auth": {
-    "auth": true
+    "auth": false
   }
 }

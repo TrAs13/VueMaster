@@ -2,6 +2,9 @@ import axios from "axios";
 import { createStore } from "vuex";
 const store = createStore({
   actions: {
+    login(ctx) {
+      ctx.commit("login");
+    },
     async fetchTasks(ctx) {
       const res = await axios.get(`http://localhost:3000/tasks`);
       const tasks = res.data;
@@ -41,6 +44,9 @@ const store = createStore({
     },
   },
   mutations: {
+    login(state) {
+      state.auth = !state.auth;
+    },
     updateTasks(state, tasks) {
       state.tasks = tasks;
     },
@@ -61,6 +67,7 @@ const store = createStore({
   },
   state: {
     tasks: [],
+    auth: false,
   },
   getters: {
     allTasks(state) {
@@ -71,6 +78,9 @@ const store = createStore({
     },
     getNotComletedTasks(state) {
       return state.tasks.filter((item) => !item.done);
+    },
+    getAuth(state) {
+      return state.auth;
     },
   },
 });

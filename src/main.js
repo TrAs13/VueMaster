@@ -5,4 +5,4 @@ import store from "./store/store";
 import axios from "axios";
 import VueAxios from "vue-axios";
 
-createApp(App).use(routes, VueAxios, axios).use(store).mount("#app");
+createApp(App).use(store).use(routes, VueAxios, axios).mount("#app");

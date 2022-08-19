@@ -1,6 +1,5 @@
 <template>
   <h1>Hi from About</h1>
-  {{ counter }}
 </template>
 
 <script>
