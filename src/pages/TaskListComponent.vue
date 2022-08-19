@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import FormAddTaskComponent from "@/components/FormAddTaskComponent.vue";
 import TaskListFilterComponent from "@/components/TaskListFilterComponent.vue";
 import TaskListSearchComponent from "../components/TaskListSearchComponent.vue";
@@ -52,26 +51,9 @@ export default {
     };
   },
   async created() {
-    try {
-      const res = await axios.get(`http://localhost:3000/tasks`);
-      this.items = res.data;
-      console.log(this.items);
-    } catch (error) {
-      console.log(error);
-    }
+    this.$store.dispatch("fetchTasks");
   },
   methods: {
-    async addTask(title, desc) {
-      const res = await axios.post(`http://localhost:3000/tasks`, {
-        id: new Date(),
-        title: title,
-        desc: desc,
-        created: new Date(),
-        updated: new Date(),
-        done: false,
-      });
-      this.items = [...this.items, res.data];
-    },
     changefilter(filter) {
       this.filter = filter;
     },
@@ -81,7 +63,8 @@ export default {
   },
   computed: {
     filteredItems() {
-      let todos = this.items.filter(
+      let todos = this.$store.getters.allTasks;
+      todos.filter(
         (item) =>
           item.title.toLowerCase().indexOf(this.filtertext.toLowerCase()) > -1
       );

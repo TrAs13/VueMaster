@@ -32,25 +32,16 @@ export default {
     };
   },
   async created() {
-    try {
-      const res = await axios.get(`http://localhost:3000/tasks/${this.id}`);
-      this.item = res.data;
-      console.log(this.item);
-    } catch (error) {
-      console.log(error);
-    }
+    this.item = this.$store.getters.allTasks.filter(
+      (item) => item.id == this.id
+    )[0];
   },
+
   watch: {
     async "$route.path"() {
-      try {
-        const res = await axios.get(
-          `http://localhost:3000/tasks/${this.$route.params.id}`
-        );
-        this.item = res.data;
-        console.log(this.item);
-      } catch (error) {
-        console.log(error);
-      }
+      this.item = this.$store.getters.allTasks.filter(
+        (item) => item.id == this.$route.params.id
+      )[0];
     },
   },
   computed: {
@@ -65,28 +56,14 @@ export default {
       this.$router.push({ path: "/tasklist" });
     },
     async changeDone() {
-      try {
-        await axios.patch(`${`http://localhost:3000/tasks`}/${this.id}`, {
-          done: !this.item.done,
-          updated: new Date(),
-        });
-        this.item.done = !this.item.done;
-        this.item.updated = new Date();
-      } catch (error) {
-        console.error(error);
-      }
+      this.$store.dispatch("updateDone", [this.id, this.item.done]);
     },
     async changeTask() {
-      try {
-        await axios.patch(`${`http://localhost:3000/tasks`}/${this.id}`, {
-          title: this.$refs.title.innerText,
-          desc: this.$refs.desc.innerText,
-        });
-        this.item.title = this.$refs.title.innerText;
-        this.item.desc = this.$refs.desc.innerText;
-      } catch (error) {
-        console.error(error);
-      }
+      this.$store.dispatch("updateTask", [
+        this.id,
+        this.$refs.title.innerText,
+        this.$refs.desc.innerText,
+      ]);
     },
   },
 };

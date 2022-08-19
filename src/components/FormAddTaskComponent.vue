@@ -24,7 +24,8 @@ export default {
   },
   methods: {
     addTask() {
-      this.$emit("addTask", this.title, this.desc);
+      console.log(this.desc);
+      this.$store.dispatch("addTasks", [this.title, this.desc]);
     },
   },
 };
