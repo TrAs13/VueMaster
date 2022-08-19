@@ -66,6 +66,12 @@ const store = createStore({
     allTasks(state) {
       return state.tasks;
     },
+    getComletedTasks(state) {
+      return state.tasks.filter((item) => item.done);
+    },
+    getNotComletedTasks(state) {
+      return state.tasks.filter((item) => !item.done);
+    },
   },
 });
 export default store;

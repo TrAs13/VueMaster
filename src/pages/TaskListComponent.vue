@@ -1,7 +1,7 @@
 <template>
   <h1>Hi from TaskList</h1>
 
-  <FormAddTaskComponent v-on:addTask="addTask"></FormAddTaskComponent>
+  <FormAddTaskComponent></FormAddTaskComponent>
   <TaskListSearchComponent
     v-on:searchtask="searchtask"
   ></TaskListSearchComponent>
@@ -13,7 +13,7 @@
     <li
       class="list-group-item"
       v-bind:key="task"
-      v-for="task in filteredItems"
+      v-for="task in searchedItems"
       :class="[task.done ? 'bg-success' : 'bg-secondary']"
     >
       <router-link
@@ -63,14 +63,17 @@ export default {
   },
   computed: {
     filteredItems() {
-      let todos = this.$store.getters.allTasks;
-      todos.filter(
+      if (this.filter == "completed")
+        return this.$store.getters.getComletedTasks;
+      if (this.filter == "inorder")
+        return this.$store.getters.getNotComletedTasks;
+      else return this.$store.getters.allTasks;
+    },
+    searchedItems() {
+      return this.filteredItems.filter(
         (item) =>
           item.title.toLowerCase().indexOf(this.filtertext.toLowerCase()) > -1
       );
-      if (this.filter == "completed") return todos.filter((item) => item.done);
-      if (this.filter == "inorder") return todos.filter((item) => !item.done);
-      else return todos;
     },
   },
 };
